@@ -32,5 +32,5 @@ def update_my_profile(*args, **kwargs) -> Profile:
     res = request_with_auth("PUT", MY_PROFILE_URL, json=pre_profile.dict_without_none())
     check_response_errors(res, 202)
     valid_profile = MyProfile(**res.json())
-    profile = Profile(**valid_profile.dict_without_none(exclude="user"))
+    profile = Profile(**valid_profile.dict_without_none(exclude={"user"}))
     return profile

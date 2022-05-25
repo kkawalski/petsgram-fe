@@ -26,4 +26,7 @@ def my_profile():
     if form.validate_on_submit():
         profile = update_my_profile(**form.data)
         profile.store_in_session()
+    form.first_name.data = profile.first_name
+    form.last_name.data = profile.last_name
+    form.description.data = profile.description
     return render_template("my_profile.html", form=form, profile=profile)
