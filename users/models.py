@@ -1,6 +1,7 @@
-from typing import Optional
+from typing import Optional, Union
 
-from pydantic import EmailStr, HttpUrl
+from werkzeug.datastructures import FileStorage
+from pydantic import EmailStr, Extra, HttpUrl, validator
 
 from app.models import BaseModel, StoreInSessionMixin
 
@@ -12,11 +13,18 @@ class User(StoreInSessionMixin, BaseModel):
     has_profile: bool = False
 
 
+class UploadFile(BaseModel):
+    file: FileStorage
+
+    class Config:
+        arbitrary_types_allowed = True
+
+
 class Avatar(BaseModel):
     filename: str
     url: HttpUrl
-    object_id: int
-    object_type: str
+    # object_id: int
+    # object_type: str
 
 
 class Profile(StoreInSessionMixin, BaseModel):
@@ -25,6 +33,8 @@ class Profile(StoreInSessionMixin, BaseModel):
     description: Optional[str]
     avatar: Optional[Avatar]
 
+    class Config:
+        extra = Extra.ignore
 
-class MyProfile(Profile):
-    user: User
+# class MyProfile(Profile):
+#     user: User

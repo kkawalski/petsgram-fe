@@ -1,4 +1,4 @@
-from flask import redirect, render_template, url_for
+from flask import redirect, render_template, session, url_for
 
 from auth import auth_blueprint
 from auth.forms import LoginForm, RegisterUserForm
@@ -15,6 +15,12 @@ def login():
         user.store_in_session()
         return redirect(url_for("home"))
     return render_template("login.html", form=form)
+
+
+@auth_blueprint.route("/logout", methods=["GET"])
+def logout():
+    session.clear()
+    return redirect(url_for("auth.login"))
 
 
 @auth_blueprint.route("/register", methods=["GET", "POST"])

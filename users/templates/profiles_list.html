@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    {% for profile in profiles %}
+        <div><img height="300px" src="{{ profile.avatar.url }}" alt=""></div>
+        <div>{{ profile.first_name }}</div>
+        <div>{{ profile.last_name }}</div>
+    {% endfor %}
+{% endblock %}

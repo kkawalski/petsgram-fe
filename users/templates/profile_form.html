@@ -1,0 +1,12 @@
+<form action="{{ url_for('users.my_profile') }}" method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div><img height="300px" src="{{ profile.avatar.url }}" alt="Avatar"></div>
+    <div>{{ form.avatar }}</div>
+    <div>{{ form.first_name.label }}</div>
+    <div>{{ form.first_name }}</div>
+    <div>{{ form.last_name.label }}</div>
+    <div>{{ form.last_name }}</div>
+    <div>{{ form.description.label }}</div>
+    <div>{{ form.description }}</div>
+    <div>{{ form.submit }}</div>
+</form>

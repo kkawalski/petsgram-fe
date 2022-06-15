@@ -40,8 +40,7 @@ def request_with_auth(
     if headers is None:
         headers = {}
 
-    auth_data = kwargs.get("auth") or session.get("auth")
-    auth = Auth(**auth_data)
+    auth = Auth.from_session()
 
     headers.update(Authorization=f"Bearer {auth.access_token}")
 
